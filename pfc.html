@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DietManagement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      select:invalid {
+        color: #757575;
+      }
+    </style>
+  </head>
+  <body class="items-center text-gray-700">
+    <header id="header" class="bg-gray-200 mb-10"></header>
+    <main class="bg-gray-500">
+      <!-- トップ -->
+      <section id="home" class="bg-blue-200">
+        <div
+          class="flex container mx-auto py-10 px-4 flex-col md:flex-row items-center"
+        >
+          <div class="md:w-1/2 flex-grow mb-10">
+            <h1 class="text-2xl sm:text-3xl font-medium mb-4">
+              1日に必要な三大栄養素を算出<br />
+            </h1>
+            <p class="mb-8 leading-relaxed">
+              バランスの良い食事で、継続できる活動にしよう
+            </p>
+          </div>
+          <div class="md:w-1/2 lg:max-w-lg w-5/6 ">
+            <img class="rounded-lg" src="./imgs/eiyou.png" alt="" />
+          </div>
+        </div>
+      </section>
+      <!-- 計算1 -->
+      <section id="#calculator1" class="">
+        <!-- <section id="#calculator1" class="flex flex-col items-center mb-10"> -->
+        <div
+          id="box1"
+          class="container mx-auto text-xl md:text-2xl text-center"
+        >
+          <!-- <div id="box1" class="border bg-gray-200 container lg:text-4xl text-xl px-4"> -->
+          <div class="mt-10 mb-4">
+            <table></table>
+            <span class="m">性別</span>
+            <label for="male">
+              <input type="radio" name="radio" id="male" value="1" />男
+            </label>
+            <label for="famale">
+              <input type="radio" name="radio" id="famale" value="2" />女
+            </label>
+          </div>
+          <div class="mb-4">
+            <span>身長</span>
+            <label
+              ><input id="height" type="number" class="" placeholder="cm"
+            /></label>
+            <script src="https://cdn.tailwindcss.com"></script>
+          </div>
+          <div class="mb-4">
+            <span>体重</span>
+            <label
+              ><input id="weight" type="number" class="" placeholder="kg"
+            /></label>
+          </div>
+          <div>
+            <div class="mb-4">
+              <span>年齢</span>
+              <label
+                ><input id="age" type="number" class="" placeholder="歳"
+              /></label>
+            </div>
+            <button
+              id="calcu1btn"
+              class="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            >
+              計算
+            </button>
+          </div>
+          <p class="mb-10">
+            あなたの1日の消費カロリー：<span id="showKcal1"></span>
+          </p>
+        </div>
+      </section>
+      <!-- 計算2 -->
+      <section id="#calculator2" class="">
+        <div
+          id="box2"
+          class="container mx-auto bg-gray-200 text-center text-xl md:text-2xl"
+        >
+          <div class="mb-4">
+            <span>活動量</span>
+            <select name="" id="activity-level" required>
+              <option value="">選択してください</option>
+              <option value="1">あまり運動しない</option>
+              <option value="2">立ち仕事などで1日中動き回る</option>
+              <option value="3">
+                立ち仕事などで1日中動き、かつジムで運動を行う
+              </option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <span>目的</span>
+            <select name="" id="purpose" required>
+              <option value="">選択してください</option>
+              <option value="1">減量</option>
+              <option value="2">維持</option>
+              <option value="3">増量</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <section id="result" class="flex flex-col items-center mb-10">
+        <div>
+          <button
+            id="calcu2btn"
+            class="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          >
+            計算開始
+          </button>
+          <button id="debug">debug</button>
+        </div>
+        <div id="box3 border" class="bg-gray-200 flex">
+          <div id="protain-card">
+            <span style="color: #3fb8af">■</span>
+            タンパク質
+            <span id="protein"></span>
+          </div>
+          <div id="carbo-card">
+            <span style="color: #ff9e9d">■</span>
+            脂質
+            <span id="fat"></span>
+          </div>
+          <div id="fat-card">
+            <span style="color: #dad8a7">■</span>
+            炭水化物
+            <span id="carbo"></span>
+            <div id="totalcarorie-card">
+              <span style="color: #dad8a7">■</span>
+              目標カロリー
+              <span id="totalcarorie"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer">
+      <div>
+        <p class="text-center">copyrights 2023 Training Note All RIghts Reserved.</p>
+      </div>
+    </footer>
+    <!-- <script src="./js/main.js"></script> -->
+    <script src="./js/pfcCalculator.js"></script>
+    <script type="module" src="./js/appendComponents.js"></script>
+  </body>
+</html>

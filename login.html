@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase_version9_Auth_RealtimeDB (サンプル)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      /* body {
+        z-index: 999999;
+        cursor: url(./img/kinniku01.png);
+      } */
+      body {
+        overflow: hidden;
+        /* background: #e6fdff; */
+        /* cursor: none; */
+      }
+    </style>
+  </head>
+  <!-- <body class="bg-[./img/l_ghfigkb003.jpg]">  -->
+  <body>
+    <div
+      class="flex justify-center items-center h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
+    >
+      <div class="max-w-md px-6 py-8 bg-red-200 rounded-lg shadow-2xl">
+        <img src="" alt="" />
+        <form class="mt-4">
+          <div>
+            <label for="email" class="block text-gray-700">mail</label>
+            <input
+              type="email"
+              id="email"
+              class="w-full mt-2 form-input"
+              placeholder="example@example.com"
+              required
+            />
+          </div>
+          <div class="mt-4">
+            <label for="password" class="block text-gray-700">password</label>
+            <input
+              type="password"
+              id="password"
+              class="w-full mt-2 form-input"
+              placeholder="********"
+              required
+            />
+          </div>
+          <div class="mt-6">
+            <button
+              id="createAccountButton"
+              class="w-full py-3 text-white bg-lime-700 hover:bg-indigo-600 rounded-md"
+            >
+              CreateAccount
+            </button>
+          </div>
+          <div class="mt-6">
+            <button
+              id="login"
+              class="w-full py-3 text-white bg-red-400 hover:bg-indigo-600 rounded-md"
+            >
+              LOGIN
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--/LOGINボタン -->
+    <!-- <img id="myImage" src="./img/kinniku01.png" /> -->
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--/JQuery -->
+    <script type="module">
+      //###############################################
+      // 必要なFirebaseライブラリを読み込み
+      //###############################################
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+      import {
+        getAuth,
+        signInWithPopup,
+        GoogleAuthProvider,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+      //###############################################
+      //FirebaseConfig [ KEYを取得して設定！！ ]
+      //###############################################
+      const firebaseConfig = {
+        apiKey: "AIzaSyAaF2Jql0rGrvV2rTJ0GTrqdXMNFycyo6w",
+        authDomain: "fitlog-76a3d.firebaseapp.com",
+        projectId: "fitlog-76a3d",
+        storageBucket: "fitlog-76a3d.appspot.com",
+        messagingSenderId: "81071060356",
+        appId: "1:81071060356:web:522bdd643b491548b419d1",
+      };
+      const app = initializeApp(firebaseConfig);
+      //###############################################
+      //GoogleAuth(認証用)
+      //###############################################
+      const provider = new GoogleAuthProvider();
+      provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+      const auth = getAuth();
+
+      // ログイン処理
+      let index;
+      let today;
+      // let today;
+      const getToday = () => {
+        let day = new Date();
+        const year = day.getFullYear();
+        //取得文字が1桁の場合2桁に変換
+        const month = ("0" + Number(day.getMonth() + 1)).slice(-2);
+        const date = ("0" + Number(day.getDate())).slice(-2);
+        return `${year}-${month}-${date}`; //yyyy-mm-dd
+      };
+
+      $("#login").on("click", function () {
+        //Google認証完了後の処理
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            // login後のメッセージ表示の切り替え
+            localStorage.setItem("greet", "execution");
+            // 日付取得
+            historyUpdate();
+            //Login後のページ遷移
+            location.href = "index.html";
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+          });
+      });
+      $("#createAccountButton").on("click", function () {
+        let hisObj = {
+          hisArry: [],
+        };
+        index = 0;
+        hisObj.hisArry.push(1);
+        let json = JSON.stringify(hisObj.hisArry);
+        localStorage.setItem("history", json);
+
+        today = getToday();
+        console.log(today);
+      });
+      function historyUpdate() {
+      }
+    </script>
+  </body>
+</html>
