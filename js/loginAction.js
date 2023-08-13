@@ -61,22 +61,23 @@ async function logined() {
   const snapShot = await firestore
     .collection("login")
     .where("date", "==", "2023-05-16")
+    // .where("date", "==", "2023-05-16")
     .get();
-    console.log(snapShot)
+  console.log(snapShot);
   const log = snapShot.docs.map((doc) => ({
     date: doc.data().date,
   }));
   console.log(log[0].date);
-  for (let i = 0; i < log.length; i++) {
-    if (log[i].date != today) {
-    //   const ob = {
-    //     date: today,
-    //   };
-    //   const docRef = addDoc(refHistory, ob);
-    }
-  }
-  //   const ob = {
-  //     date: today,
-  //   };
-  //   const docRef = addDoc(refHistory, ob);
+  // for (let i = 0; i < log.length; i++) {
+  //   if (log[i].date != today) {
+  //     const ob = {
+  //       date: today,
+  //     };
+  //     const docRef = addDoc(refHistory, ob);
+  //   }
+  // }
+  const ob = {
+    date: today,
+  };
+  const docRef = addDoc(refHistory, ob);
 }
